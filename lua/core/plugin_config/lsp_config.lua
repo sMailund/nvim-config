@@ -1,5 +1,5 @@
 require("mason-lspconfig").setup({
-  ensure_installed = { "lua_ls" }
+  ensure_installed = { "lua_ls", "rust_analyzer" }
 })
 
 local lspconfig = require('lspconfig')
@@ -12,8 +12,9 @@ lsp_defaults.capabilities = vim.tbl_deep_extend(
   require('cmp_nvim_lsp').default_capabilities()
 )
 
+local nvim_lsp = require("lspconfig")
 
-require("lspconfig").lua_ls.setup {
+nvim_lsp.lua_ls.setup {
   settings = {
     Lua = {
       diagnostics = {
@@ -29,7 +30,32 @@ require("lspconfig").lua_ls.setup {
   }
 }
 
-require("lspconfig").lua_ls.setup({})
+local on_attach = function(client)
+    require'completion'.on_attach(client)
+end
+
+nvim_lsp.rust_analyzer.setup({
+    on_attach=on_attach,
+    settings = {
+        ["rust-analyzer"] = {
+            imports = {
+                granularity = {
+                    group = "module",
+                },
+                prefix = "self",
+            },
+            cargo = {
+                buildScripts = {
+                    enable = true,
+                },
+            },
+            procMacro = {
+                enable = true
+            },
+        }
+    }
+})
+
 
 vim.api.nvim_create_autocmd('LspAttach', {
   group = vim.api.nvim_create_augroup('UserLspConfig', {}),
