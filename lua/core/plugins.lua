@@ -1,7 +1,9 @@
 require("lazy").setup({
   "ellisonleao/gruvbox.nvim",
   "vim-test/vim-test",
-  "tpope/vim-fugitive",
+  "nvim-tree/nvim-tree.lua",
+  "nvim-tree/nvim-web-devicons",
+  "nvim-lualine/lualine.nvim",
   {
     "nvim-telescope/telescope.nvim", tag = "0.1.4",
     dependencies = { "nvim-lua/plenary.nvim" }
