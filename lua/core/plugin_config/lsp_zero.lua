@@ -13,8 +13,9 @@ lsp_zero.on_attach(function(client, bufnr)
 
   local opts = {buffer = bufnr}
 
-    vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
-    vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
+    -- vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
+    -- vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
+    -- TODO move all of these to which key, further down
     vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
     vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
     vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, opts)
@@ -33,6 +34,15 @@ lsp_zero.on_attach(function(client, bufnr)
     end, opts)
 
 end)
+
+
+local wk = require("which-key")
+wk.register({
+  g = {
+    D = { function() vim.lsp.buf.declaration() end, "Go to declaration" }, -- you can also pass functions!
+    d = { function() vim.lsp.buf.definition() end, "Go to definition" } -- you can also pass functions!
+  },
+})
 
 local lspconfig = require('lspconfig')
 
