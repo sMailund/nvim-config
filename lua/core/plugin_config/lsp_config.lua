@@ -1,5 +1,5 @@
 require("mason-lspconfig").setup({
-  ensure_installed = { "lua_ls", "rust_analyzer" }
+  ensure_installed = { "lua_ls", "rust_analyzer", "csharp_ls" }
 })
 
 local lspconfig = require('lspconfig')
@@ -13,6 +13,8 @@ lsp_defaults.capabilities = vim.tbl_deep_extend(
 )
 
 local nvim_lsp = require("lspconfig")
+
+nvim_lsp.csharp_ls.setup { }
 
 nvim_lsp.lua_ls.setup {
   settings = {
