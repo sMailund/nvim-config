@@ -15,4 +15,5 @@ require("lazy").setup({
   "hrsh7th/nvim-cmp",
   "hrsh7th/cmp-nvim-lsp",
   "simrat39/rust-tools.nvim",
+  "nanotee/nvim-lsp-basics",
 })

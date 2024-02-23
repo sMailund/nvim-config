@@ -12,11 +12,16 @@ lsp_defaults.capabilities = vim.tbl_deep_extend(
   require('cmp_nvim_lsp').default_capabilities()
 )
 
-local nvim_lsp = require("lspconfig")
+lspconfig.csharp_ls.setup {
+  on_attach = function(client, bufnr) -- TODO make this run for all languages
+    local basics = require('lsp_basics')
 
-nvim_lsp.csharp_ls.setup { }
+    basics.make_lsp_commands(client, bufnr)
+    basics.make_lsp_mappings(client, bufnr)
+  end
+}
 
-nvim_lsp.lua_ls.setup {
+lspconfig.lua_ls.setup {
   settings = {
     Lua = {
       diagnostics = {
@@ -60,6 +65,8 @@ vim.api.nvim_create_autocmd('LspAttach', {
     vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, opts)
     vim.keymap.set({ 'n', 'v' }, '<space>ca', vim.lsp.buf.code_action, opts)
     vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
+    vim.keymap.set('n', 'gci', vim.lsp.buf.incoming_calls, opts)
+    vim.keymap.set('n', 'gco', vim.lsp.buf.outgoing_calls, opts)
     vim.keymap.set('n', '<space>f', function()
       vim.lsp.buf.format { async = true }
     end, opts)
