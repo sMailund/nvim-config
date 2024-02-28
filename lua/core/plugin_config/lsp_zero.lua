@@ -39,8 +39,8 @@ end)
 local wk = require("which-key")
 wk.register({
   g = {
-    D = { function() vim.lsp.buf.declaration() end, "Go to declaration" }, -- you can also pass functions!
-    d = { function() vim.lsp.buf.definition() end, "Go to definition" } -- you can also pass functions!
+    D = { function() vim.lsp.buf.declaration() end, "Go to declaration" }, 
+    d = { function() vim.lsp.buf.definition() end, "Go to definition" } 
   },
 })
 
